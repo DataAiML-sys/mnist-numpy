@@ -30,7 +30,6 @@ font = pygame.font.SysFont("Arial", 24)
 
 canvas = np.zeros((CANVAS_SIZE, CANVAS_SIZE), dtype=np.uint8)
 
-
 def draw_on_canvas(mouse_x, mouse_y):
     if mouse_y >= WINDOW_SIZE:
         return
@@ -44,7 +43,6 @@ def draw_on_canvas(mouse_x, mouse_y):
                 if 0 <= nx < CANVAS_SIZE and 0 <= ny < CANVAS_SIZE:
                     canvas[ny, nx] = 255
 
-
 def canvas_to_surface():
     surface = pygame.Surface((CANVAS_SIZE, CANVAS_SIZE))
     for y in range(CANVAS_SIZE):
@@ -52,7 +50,6 @@ def canvas_to_surface():
             v = canvas[y, x]
             surface.set_at((x, y), (v, v, v))
     return pygame.transform.scale(surface, (WINDOW_SIZE, WINDOW_SIZE))
-
 
 def center_and_scale(img):
     """Crop digit to its bounding box, scale to fit in 20x20, place in center of 28x28."""
@@ -82,7 +79,6 @@ def center_and_scale(img):
 
     return result
 
-
 def predict_digit():
     img = center_and_scale(canvas)
     x = img.astype(np.float32) / 255.0
@@ -91,7 +87,6 @@ def predict_digit():
     pred = np.argmax(probs[0])
     confidence = probs[0][pred] * 100
     return pred, confidence
-
 
 running = True
 mouse_pressed = False
