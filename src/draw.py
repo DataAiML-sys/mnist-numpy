@@ -54,8 +54,38 @@ def canvas_to_surface():
     return pygame.transform.scale(surface, (WINDOW_SIZE, WINDOW_SIZE))
 
 
+def center_and_scale(img):
+    """Crop digit to its bounding box, scale to fit in 20x20, place in center of 28x28."""
+    rows = np.any(img > 0, axis=1)
+    cols = np.any(img > 0, axis=0)
+    if not rows.any() or not cols.any():
+        return img
+
+    rmin, rmax = np.where(rows)[0][[0, -1]]
+    cmin, cmax = np.where(cols)[0][[0, -1]]
+
+    cropped = img[rmin:rmax+1, cmin:cmax+1]
+
+    h, w = cropped.shape
+    scale = 20.0 / max(h, w)
+    new_h = max(1, int(round(h * scale)))
+    new_w = max(1, int(round(w * scale)))
+
+    row_idx = (np.arange(new_h) * (h / new_h)).astype(int)
+    col_idx = (np.arange(new_w) * (w / new_w)).astype(int)
+    resized = cropped[row_idx][:, col_idx]
+
+    result = np.zeros((28, 28), dtype=np.uint8)
+    top = (28 - new_h) // 2
+    left = (28 - new_w) // 2
+    result[top:top+new_h, left:left+new_w] = resized
+
+    return result
+
+
 def predict_digit():
-    x = canvas.astype(np.float32) / 255.0
+    img = center_and_scale(canvas)
+    x = img.astype(np.float32) / 255.0
     x = x.reshape(1, 784)
     probs = net.forward(x)
     pred = np.argmax(probs[0])
