@@ -161,7 +161,7 @@ roughly the central 20×20 region of a 28×28 image. As a result, the model
 works best when the input digit is drawn centered in the canvas.
 
 Digits drawn very close to the edges may be misclassified. This is a classic 
-example of **distribution shift** — the input distribution at inference time 
+example of **distribution shift** - the input distribution at inference time 
 differs from the training distribution.
 
 ## Future work
@@ -169,7 +169,7 @@ differs from the training distribution.
 - **Input preprocessing:** automatically crop and center the drawn digit 
   before feeding it to the network (standard MNIST-style normalization).
 - **Data augmentation:** during training, randomly shift each MNIST digit 
-  by ±2–4 pixels to make the network robust to translation.
+  by ±2-4 pixels to make the network robust to translation.
 - **Convolutional architecture:** replace the fully-connected layers with 
   a small CNN to better exploit spatial structure.
 
