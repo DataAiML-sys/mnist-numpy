@@ -1,5 +1,10 @@
 # MNIST Neural Network from Scratch (Python + NumPy)
 
+![Python](https://img.shields.io/badge/Python-3.14-blue)
+![NumPy](https://img.shields.io/badge/NumPy-only-blue)
+![Accuracy](https://img.shields.io/badge/Accuracy-97.66%25-brightgreen)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+
 A two-layer neural network implemented **from scratch** in pure NumPy - no PyTorch, no TensorFlow, no Keras. Trained on the MNIST dataset of handwritten digits, achieving **97.66% test accuracy**.
 
 Includes an interactive drawing app (Pygame) where you can draw a digit with your mouse and the network predicts it in real time.
